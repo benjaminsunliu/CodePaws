@@ -69,8 +69,21 @@ app.post('/new', (req, res) => {
         res.render('create', {activePage: 'Create', usernameError, passwordError, created: false, loggedUser: req.session.username});
     } else {
         // Process the form (e.g., save to database) and redirect or render success message
-        fs.appendFileSync(loginFilePath, `${username}:${password}\n`);
-        res.render('create', {activePage: 'Create', usernameError: null, passwordError: null, created: true, loggedUser: req.session.username});
+        //check if username already exists
+        const loginData = fs.readFileSync(loginFilePath, 'utf8');
+        const users = loginData.split('\n');
+        const userExists = users.some(user => {
+            const [fileUsername] = user.split(':');
+            return fileUsername === username;
+        });
+
+        if (userExists) {
+            res.render('create', {activePage: 'Create', usernameError: 'Username already exists.', passwordError: null, created: false, loggedUser: req.session.username});
+        }
+        else{
+            fs.appendFileSync(loginFilePath, `${username}:${password}\n`);
+            res.render('create', {activePage: 'Create', usernameError: null, passwordError: null, created: true, loggedUser: req.session.username});
+        }
     }
 });
 
