@@ -3,6 +3,7 @@ const fs = require('fs');
 const path = require('path');
 const session = require('express-session');
 const app = express();
+const PORT = 5050;
 
 app.set('view engine', 'ejs');
 
@@ -113,4 +114,4 @@ app.get('/logout', (req, res) => {
 
 
 
-app.listen(3000, () => console.log('Server running on port 3000'));
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
