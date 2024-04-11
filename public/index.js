@@ -1,3 +1,4 @@
+//Date Function
 function getCurrentDate(){
     let date = new Date();
     let weekday = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
@@ -18,8 +19,9 @@ function getCurrentDate(){
     document.getElementById("dateandtime").innerHTML = dayname + ", " + month + " " + day + ", " + year + ", " + hour + ":" + minutes + ":" + seconds;
     return dayname + ", " + month + " " + day + ", " + year + ", " + hour + ":" + minutes + ":" + seconds;
 }
-setInterval(getCurrentDate, 1000);
+setInterval(getCurrentDate, 1000); // Update the date every second
 
+//Pet Information
 let petNames = ["Ben", "Milo", "Boomer","Jordan", "Eric", "Jin", "Snowy", "Ryom", "Jef", "Yippee"];
 let petPhotos = ["images/corgi.jpg", "images/milo.jpg", "images/boomer.jpg","https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcTNUsLxR5bVc0iPWDsXRYJzx8up7CIuExD8nYyYGX01KK_1VqXl0g7tgCAEw1Zh-4fNjTdJgg", "images/eric.jpg", "images/jin.jpg", "images/snowy.jpg", "images/ryom.jpg", "", ""];
 let petTypes = ["Dog", "Cat", "Dog", "Cat", "Cat", "Dog", "Dog", "Dog", "Dog", "Dog"];
@@ -29,7 +31,7 @@ let petGenders = ["Male", "Male", "Male","Female", "Female", "Male", "Male", "Fe
 let petAlongs = ["Children, Dogs", "Children", "Dogs", "Children", "Children", "Kids", "Dogs", "", ""];
 let petComments = ["Very friendly and playful", "Very Friendly and Playful", "Energetic and Playful","Calm and likes to sleep", "Shy and quiet, but very friendly", "", "Playful and Gentle", "Sleepy and Quiet", "", ""];
 
-
+//Load Pets
 function loadPets(){
     for(let i = 0; i < petNames.length; i++){
         let petinfo = 
@@ -53,6 +55,7 @@ function loadPets(){
     }
 }
 
+//Find Form Validation
 function validateFindForm(event){
     let type = document.querySelector('input[name="type"]:checked');
     let breed = document.getElementById("breed").value;
@@ -65,6 +68,7 @@ function validateFindForm(event){
     }
 }
 
+//Give Form Validation
 function validateGiveForm(event){
     let type = document.querySelector('input[name="type"]:checked');
     let breed = document.getElementById("breed").value;

@@ -15,6 +15,7 @@
 </head>
 <body>
 <header>
+    <p style="text-align: left; font-size: 15px; color: #222831; padding-top: 3px; padding-left: 3px"><strong>Welcome <%= loggedUser ? loggedUser + '! Have a Great Day!' : 'Guest! You are currently logged out'%></strong></p>
     <table>
         <tr>
             <td>
@@ -38,8 +39,8 @@
                 <li class="<%= (activePage === 'Home') ? 'active' : 'leftsidebar' %>">
                     <a href="/" class="leftsidebar">Home</a>
                 </li>
-                <li class="<%= (activePage === 'Pets') ? 'active' : 'leftsidebar' %>">
-                    <a href="/pets" class="leftsidebar">Browse available pets</a>
+                <li class="<%= (activePage === 'Create') ? 'active' : 'leftsidebar' %>">
+                    <a href="/create" class="leftsidebar">Create an Account</a>
                 </li>
                 <li class="<%= (activePage === 'Find') ? 'active' : 'leftsidebar' %>">
                     <a href="/find" class="leftsidebar">Find a dog/cat</a>
@@ -51,10 +52,13 @@
                     <a href="/catcare" class="leftsidebar">Cat Care</a>
                 </li>
                 <li class="<%= (activePage === 'Give') ? 'active' : 'leftsidebar' %>">
-                    <a href="/give" class="leftsidebar">Have a pet to give away</a>
+                    <a href="<%= (loggedUser ? '/give' : '/login')%>" class="leftsidebar">Have a pet to give away</a>
                 </li>
                 <li class="<%= (activePage === 'Contact') ? 'active' : 'leftsidebar' %>">
                     <a href="/contact" class="leftsidebar">Contact us</a>
+                </li>
+                <li class="leftsidebar">
+                    <a href="/logout" class="leftsidebar">Logout</a>
                 </li>
             </ul>
         </nav>

@@ -1,0 +1,28 @@
+<%- include("partials/header")%>
+<div id="create" class="section">
+    <div class="content">
+        <h2 class="content">Create an Account</h2><br>
+        <fieldset class="create">
+            <legend><strong>Enter your information below:</strong></legend>
+            <form action="/new" method="post">
+                <label for="username"><strong>Username*:</strong></label>
+                <input type="text" name="username" id="username" required>
+                <% if (usernameError) { %>
+                    <p style="color: red;"><%= usernameError %></p>
+                <% } %>
+                <p>(Username must contain digits and lower/uppercase letters only)</p><br>
+                <label for="password"><strong>Password*:</strong></label>
+                <input type="password" name="password" id="password" required>
+                <% if (passwordError) { %>
+                    <p style="color: red;"><%= passwordError %></p>
+                <% } %>
+                <p>(Password must be at least 4 characters long, at least 1 digit and 1 letter)</p><br><br>
+                <input type="submit" value="Create Account" style="padding: 2px">
+                <%if (created){ %>
+                    <p style="color: green;">Account created successfully!</p>
+                <% } %>
+            </form>
+        </fieldset>
+    </div>
+</div>
+<%- include("partials/footer")%>
