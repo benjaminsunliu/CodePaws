@@ -39,7 +39,6 @@ fieldset.create{
     margin-right: 10px;
     padding-top: 30px;
     padding-bottom: 20px;
-
 }
 
 .imgcontainer img{
@@ -104,6 +103,17 @@ footer{
     margin-top: auto;
     position: sticky;
     color: #EEEEEE;
+}
+
+p.userGreeting {
+    background-color: #00ADB5;
+    color: white;
+    text-align: center;
+    /*font-family: cursive;*/
+    text-shadow: 2px 2px 4px black;
+    font-size: 17px;
+    padding: 10px;
+    border-radius: 5px;
 }
 
 ul.leftsidebar{
@@ -224,3 +234,82 @@ li.active{
     text-align: center;
     color: #EEEEEE;
 }
+
+.allPetsLink {
+    display: inline-block;
+    padding: 5px;
+    margin: 10px 0;
+    color: white;
+    background-color: #393E46;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.allPetsLink:hover {
+    background-color: #00ADB5;
+    color: black;
+}
+
+.reglogLink {
+    color: #00ADB5;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.reglogLink:hover {
+    color: black;
+    font-weight: bold;
+}
+
+.button {
+    display: inline-block;
+    padding: 8px 15px;
+    margin: 10px 0;
+    color: #FFFFFF;
+    background-color: #00ADB5;
+    text-decoration: none;
+    border: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+    cursor: pointer;
+    font-family: "Courier New", monospace, sans-serif;
+    font-size: 15px;
+}
+
+.button:hover {
+    background-color: #393E46;
+}
+
+.reglogButton {
+    display: inline-block;
+    padding: 8px 15px;
+    color: #FFFFFF;
+    background-color: #393E46;
+    text-decoration: none;
+    border: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+    cursor: pointer;
+    font-family: "Courier New", monospace, sans-serif;
+    font-size: 15px;
+}
+
+.reglogButton:hover {
+    background-color: #00ADB5;
+}
+
+.inputField {
+    box-sizing: border-box;
+    border: 2px solid #393E46;
+    border-radius: 4px;
+    background-color: #f8f8f8;
+    font-size: 16px;
+    transition: 0.3s;
+}
+
+.inputField:focus {
+    border-color: #00ADB5;
+    background-color: #e8e8e8;
+}
+

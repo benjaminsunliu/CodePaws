@@ -10,6 +10,9 @@ function getCurrentDate(){
     let hour = date.getHours();
     let minutes = date.getMinutes();
     let seconds = date.getSeconds();
+    if(hour < 10){
+        hour = "0" + hour;
+    }
     if (minutes < 10){
         minutes = "0" + minutes;
     }
@@ -20,40 +23,6 @@ function getCurrentDate(){
     return dayname + ", " + month + " " + day + ", " + year + ", " + hour + ":" + minutes + ":" + seconds;
 }
 setInterval(getCurrentDate, 1000); // Update the date every second
-
-//Pet Information
-let petNames = ["Ben", "Milo", "Boomer","Jordan", "Eric", "Jin", "Snowy", "Ryom", "Jef", "Yippee"];
-let petPhotos = ["images/corgi.jpg", "images/milo.jpg", "images/boomer.jpg","https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcTNUsLxR5bVc0iPWDsXRYJzx8up7CIuExD8nYyYGX01KK_1VqXl0g7tgCAEw1Zh-4fNjTdJgg", "images/eric.jpg", "images/jin.jpg", "images/snowy.jpg", "images/ryom.jpg", "", ""];
-let petTypes = ["Dog", "Cat", "Dog", "Cat", "Cat", "Dog", "Dog", "Dog", "Dog", "Dog"];
-let petBreeds = ["Corgi", "Shorthair", "Labrador", "Siamese", "Ragdoll", "Pug", "Bichon", "Yorshire", "Husky", "Shiba Inu"];
-let petAges = ["2", "1", "5","3", "2", "3", "4", "1", "2", "1"];
-let petGenders = ["Male", "Male", "Male","Female", "Female", "Male", "Male", "Female", "Male", "Female"];
-let petAlongs = ["Children, Dogs", "Children", "Dogs", "Children", "Children", "Kids", "Dogs", "", ""];
-let petComments = ["Very friendly and playful", "Very Friendly and Playful", "Energetic and Playful","Calm and likes to sleep", "Shy and quiet, but very friendly", "", "Playful and Gentle", "Sleepy and Quiet", "", ""];
-
-//Load Pets
-function loadPets(){
-    for(let i = 0; i < petNames.length; i++){
-        let petinfo = 
-        `<fieldset class="browsePet">
-            <h3>${petNames[i]}</h3>
-            <div class="imgcontainer">
-                ${(petPhotos[i] == "" || petPhotos[i] == undefined) ? `<img class="petImg" src="images/codepawsnobg.png" alt="image${i}"><br>`: `<img class="petImg" src="${petPhotos[i]}" alt="image${i}"><br>`}
-                
-            </div>
-            <p><strong>Type:</strong> ${petTypes[i]}</p>
-            <p><strong>Breed:</strong> ${petBreeds[i]}</p>
-            ${petAges[i] > 1 ? `<p><strong>Age:</strong> ${petAges[i]} years</p>`: `<p><strong>Age:</strong> ${petAges[i]} year</p>`}
-            <p><strong>Gender:</strong> ${petGenders[i]}</p>
-            ${(petAlongs[i] == "" || petAlongs[i] == undefined) ? "<p><strong>Good with:</strong> Not Specified": `<p><strong>Good with:</strong> ${petAlongs[i]}`}</p>
-            ${(petComments[i] == "" || petComments[i] == undefined) ? "<p><strong>Comments:</strong> No Comments</p><br>" : `<p><strong>Comments:</strong> ${petComments[i]}</p><br>`}
-            <button class="interested">Interested</button>
-        </fieldset>`
-        ;
-
-        document.getElementById("pets").innerHTML += petinfo;
-    }
-}
 
 //Find Form Validation
 function validateFindForm(event){
@@ -91,7 +60,15 @@ function validateGiveForm(event){
     }
 }
 
+function displayEmail(petId) {
+    var emailDiv = document.getElementById('email-' + petId);
+    if (emailDiv.style.display === 'none') {
+        emailDiv.style.display = 'block';
+    } else {
+        emailDiv.style.display = 'none';
+    }
+}
+
 window.onload = function(){
     getCurrentDate();
-    loadPets();
 }
