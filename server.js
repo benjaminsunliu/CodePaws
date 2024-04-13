@@ -4,6 +4,7 @@ const path = require('path');
 const session = require('express-session');
 const app = express();
 const PORT = 5050;
+require("/public/index.js")
 
 app.set('view engine', 'ejs');
 
@@ -91,6 +92,9 @@ app.post('/new', (req, res) => {
     }
     if (password.length < 4) {
         passwordError = 'Password must be at least 4 characters long.';
+    }
+    else if (!/[A-Za-z]/.test(password) || !/[0-9]/.test(password)){
+        passwordError = 'Password must contain at least 1 digit and 1 letter.';
     }
 
     // Check if there were any errors
@@ -230,4 +234,6 @@ app.get("/allPets", (req, res) => {
     res.render('pets', { activePage: 'Find', pets, loggedUser: req.session.username });
 });
 
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+module.exports = app;
+
+//app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
