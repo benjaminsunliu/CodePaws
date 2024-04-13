@@ -226,7 +226,7 @@ app.get("/allPets", (req, res) => {
         const [num, username, petType, petBreed, petAge, petGender, petGetAlongDog, petGetAlongCat, petGetAlongChildren, comments, name, email, petImage] = line.split('|');
         return { num, username, petType, petBreed, petAge, petGender, petGetAlongDog, petGetAlongCat, petGetAlongChildren, comments, name, email, petImage}
     });
-
+    console.log(`User "${req.session.username}" is viewing all pets.`);
     res.render('pets', { activePage: 'Find', pets, loggedUser: req.session.username });
 });
 
