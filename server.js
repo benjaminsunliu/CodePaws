@@ -4,7 +4,6 @@ const path = require('path');
 const session = require('express-session');
 const app = express();
 const PORT = 5050;
-require("/public/index.js")
 
 app.set('view engine', 'ejs');
 
@@ -234,6 +233,4 @@ app.get("/allPets", (req, res) => {
     res.render('pets', { activePage: 'Find', pets, loggedUser: req.session.username });
 });
 
-module.exports = app;
-
-//app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
