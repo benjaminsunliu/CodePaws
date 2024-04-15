@@ -14,7 +14,10 @@ const redisClient = redis.createClient({
     url: process.env.REDIS_URL,
     legacyMode: true
 });
-redisClient.connect().catch(console.error);
+redisClient.connect().catch(error => {
+    console.error('Failed to connect to Redis:', error);
+});
+
 
 app.use(
     express.json(),
@@ -26,7 +29,7 @@ app.use(session({
     store: new RedisStore({ client: redisClient }),
     secret: 'your secret key',
     resave: false,
-    saveUninitialized: false,
+    saveUninitialized: true,
     cookie: {
         secure: 'auto',
         httpOnly: true,
