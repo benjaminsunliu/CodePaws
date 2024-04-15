@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>CodePaws Adoption</title>
+    <meta charset="utf-8">
+    <link rel="icon" href="/images/codepawsrounded.png">
+
+    <link rel="stylesheet" href="/styles.css">
+    <!--All images used on this site are from:
+        wikipedia.com, github.com, linkedin.com, AI Generated or Personal Photos
+        All references used from articles are cited at the
+        bottom of their respective pages.
+    -->
+    <script src="/index.js" defer></script>
+</head>
+<%- include("partials/header")%>
+<%- include("partials/leftsidebar")%>
+<div id="create" class="section">
+    <div class="content">
+        <h2 class="content">Login to your Account</h2><br>
+        <fieldset class="create">
+            <legend><strong>Enter your information below:</strong></legend>
+            <form action="/login" method="post">
+                <label for="username"><strong>Username*:</strong></label>
+                <input type="text" name="username" id="username" class="inputField" required><br><br>
+
+                <label for="password"><strong>Password*:</strong></label>
+                <input type="password" name="password" id="password" class="inputField" required><br><br>
+
+                <input type="submit" value="Login" class="reglogButton"><br>
+                <% if(loginError) { %>
+                    <p style="color: red"><strong><%= loginError %></strong></p>
+                <% } %>
+                <br><p>Don't have an account? <a href="/create" class="reglogLink"><strong>Register here</strong></a></p>
+            </form>
+        </fieldset>
+    </div>
+</div>
+<%- include("partials/footer")%>

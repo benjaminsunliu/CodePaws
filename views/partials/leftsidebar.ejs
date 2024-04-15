@@ -1,0 +1,31 @@
+<main>
+    <div class="leftsidebar">
+        <nav>
+            <ul class="leftsidebar">
+                <li class="<%= (activePage === 'Home') ? 'active' : 'leftsidebar' %>">
+                    <a href="/" class="leftsidebar">Home</a>
+                </li>
+                <li class="<%= (activePage === 'Create') ? 'active' : 'leftsidebar' %>">
+                    <a href="/create" class="leftsidebar">Create an Account</a>
+                </li>
+                <li class="<%= (activePage === 'Find') ? 'active' : 'leftsidebar' %>">
+                    <a href="/find" class="leftsidebar">Find a dog/cat</a>
+                </li>
+                <li class="<%= (activePage === 'Dogcare') ? 'active' : 'leftsidebar' %>">
+                    <a href="/dogcare" class="leftsidebar">Dog Care</a>
+                </li>
+                <li class="<%= (activePage === 'Catcare') ? 'active' : 'leftsidebar' %>">
+                    <a href="/catcare" class="leftsidebar">Cat Care</a>
+                </li>
+                <li class="<%= (activePage === 'Give') ? 'active' : 'leftsidebar' %>">
+                    <a href="/give" class="leftsidebar">Have a pet to give away</a>
+                </li>
+                <li class="<%= (activePage === 'Contact') ? 'active' : 'leftsidebar' %>">
+                    <a href="/contact" class="leftsidebar">Contact us</a>
+                </li>
+                <li class="leftsidebar">
+                    <a href="/logout" class="leftsidebar">Logout</a>
+                </li>
+            </ul>
+        </nav>
+    </div>

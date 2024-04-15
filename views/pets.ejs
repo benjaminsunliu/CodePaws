@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>CodePaws Adoption</title>
+    <meta charset="utf-8">
+    <link rel="icon" href="/images/codepawsrounded.png">
+
+    <link rel="stylesheet" href="/styles.css">
+    <!--All images used on this site are from:
+        wikipedia.com, github.com, linkedin.com, AI Generated or Personal Photos
+        All references used from articles are cited at the
+        bottom of their respective pages.
+    -->
+    <script src="/index.js" defer></script>
+</head>
+<%- include("partials/header")%>
+<%- include("partials/leftsidebar")%>
+<div id="browse" class="section">
+    <h2 class="content">Available Pets</h2>
+    <div id="pets">
+        <% if (pets && pets.length) { %>
+            <% pets.forEach(pet => { %>
+                <fieldset class="browsePet">
+                    <h3 id="<%= pet.num %>"><%= pet.name %></h3>
+                    <img class="petImg" src="<%=pet.petImage%>" alt="Pet Image" />
+                    <p><strong>Type: </strong><%= pet.petType %></p>
+                    <p><strong>Breed: </strong><%= pet.petBreed %></p>
+                    <p><strong>Age: </strong><%= pet.petAge %></p>
+                    <p><strong>Gender: </strong><%= pet.petGender %></p>
+                    <p><strong>Good with: </strong>
+                        <%= (pet.petGetAlongDog === "Dogs") ? "Dogs ": ""%>
+                        <%= (pet.petGetAlongCat === "Cats") ? "Cats ": ""%>
+                        <%= (pet.petGetAlongChildren === "Children") ? "Children ": ""%>
+                        <%= (pet.petGetAlongDog === 'undefined' && pet.petGetAlongCat === 'undefined' && pet.petGetAlongChildren === 'undefined') ? "Not Specified" : ""%>
+                    </p>
+                    <p><strong>Comments: </strong>
+                        <%= (pet.comments === '') ? "No Comments" : pet.comments%>
+                    </p><br>
+                    <button class="interested" onclick="displayEmail(<%= pet.num %>)">Interested</button>
+                    <div id="email-<%= pet.num %>" style="display:none;">
+                        <p><strong>Contact Email: </strong><%= pet.email %></p>
+                    </div>
+                </fieldset>
+
+            <% }) %>
+
+        <% } else { %>
+            <img class="content" src="images/nopets.png" style="width: 500px; margin: 0 auto; padding-top: 50px">
+        <% } %>
+    </div>
+</div>
+<%- include("partials/footer")%>
