@@ -7,6 +7,7 @@ const app = express();
 const PORT = 5050;
 
 app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname, 'views'));
 
 app.use(
     express.json(),
