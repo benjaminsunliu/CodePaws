@@ -23,7 +23,6 @@ redisClient.connect().catch(error => {
 mongoose.connect(process.env.MONGODB_URI, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
-    useCreateIndex: true
 }).then(() => console.log('MongoDB connected successfully.'))
     .catch(err => console.error('MongoDB connection error:', err));
 
