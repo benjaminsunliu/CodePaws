@@ -2,6 +2,7 @@ const express = require('express');
 const fs = require('fs');
 const path = require('path');
 const session = require('express-session');
+const alert = require('alert');
 const app = express();
 const PORT = 5050;
 
@@ -56,8 +57,14 @@ app.get('/catcare', function(req, res) {
     console.log(`User "${req.session.username}" is on the catcare page.`)
 });
 app.get('/login', function(req, res) {
-    res.render('login', {activePage: 'Give', loginError: null, loggedUser: req.session.username});
-    console.log(`User "${req.session.username}" is on the login page.`)
+    if(req.session.username){
+        res.render('give', {activePage: 'Give', loggedUser: req.session.username, giveSuccess: null});
+        console.log(`User "${req.session.username}" is already logged in. Redirecting to /give.`)
+    }
+    else {
+        res.render('login', {activePage: 'Give', loginError: null, loggedUser: req.session.username});
+        console.log(`User "${req.session.username}" is on the login page.`)
+    }
 });
 app.get('/give', function(req, res) {
     if(!req.session.username){
@@ -133,7 +140,7 @@ app.post('/login', (req, res) => {
     if (isValidUser) {
         req.session.username = username;
         req.session.save();
-        console.log('New', req.session); // Log the session
+        console.log(`New Session from "${req.session.username}"`); // Log the session
         res.render('give', {activePage: 'Give', loggedUser: req.session.username, loginError: null, giveSuccess: null});
     }
     else {
@@ -142,10 +149,17 @@ app.post('/login', (req, res) => {
     }
 });
 app.get('/logout', (req, res) => {
-    // Destroy the session
-    console.log(`User "${req.session.username}" logged out.`)
-    req.session.destroy();
-    res.redirect('/');
+    if (!req.session.username) {
+        res.render('login', {activePage: 'Give', loginError: "You are not logged in.", loggedUser: req.session.username})
+        console.log("User requested /logout without logging in. Redirecting to /login.")
+    }
+    else {
+        // Destroy the session
+        console.log(`User "${req.session.username}" logged out.`)
+        req.session.destroy();
+        res.render('login', {activePage: 'Give', loginError: "You have logged out successfully.", loggedUser: null});
+    }
+
 });
 
 app.post('/submit-pet', upload.single('image'), (req, res) => {
@@ -153,7 +167,7 @@ app.post('/submit-pet', upload.single('image'), (req, res) => {
     console.log(`User "${req.session.username}" submitted a pet.`)
     const { type, givebreed, age, gender, getalongdog, getalongcat, getalongchildren, comments, name, email } = req.body;
     const image = req.file ? `/petImages/${req.file.originalname}` : '/images/codepawsnobg.png';
-    console.log(req.file);
+    console.log(req.file ? `Image uploaded: ${req.file.originalname}` : 'No image uploaded');
     // Read existing pet data from file
     const petDataFilePath = path.join(__dirname, 'data', 'pets.txt');
     let petData = '';
@@ -208,15 +222,8 @@ app.post('/find-pet', (req, res) => {
         const [num, username, petType, petBreed, petAge, petGender, petGetAlongDog, petGetAlongCat, petGetAlongChildren, comments, name, email, petImage] = line.split('|');
         return { num, username, petType, petBreed, petAge, petGender, petGetAlongDog, petGetAlongCat, petGetAlongChildren, comments, name, email, petImage}
     });
-    console.log(pets);
 
-    //console.log(pets);
     res.render('pets', { activePage: 'Find', pets, loggedUser: req.session.username });
-});
-
-app.post('/interested', (req,res) => {
-    console.log(`User ${req.session.username} is interested in the pet.`);
-    alert("Thank you for your interest! The owner will contact you shortly.");
 });
 
 app.get("/allPets", (req, res) => {
@@ -233,4 +240,21 @@ app.get("/allPets", (req, res) => {
     res.render('pets', { activePage: 'Find', pets, loggedUser: req.session.username });
 });
 
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+let logs = [];
+let oldLog = console.log;
+console.log = function(message) {
+    logs.push(message);
+    oldLog.apply(console, arguments);
+};
+app.get('/logs', function(req, res) {
+    let logsJoined= logs.join('<br>');
+    if(req.session.username === "admin"){
+        res.send(logsJoined);
+    }
+    else{
+        res.send("You are not authorized to view the logs.");
+    }
+});
+
+//app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+module.exports = app;
