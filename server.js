@@ -4,6 +4,8 @@ const path = require('path');
 const session = require('express-session');
 const RedisStore = require('connect-redis')(session);
 const redis = require('redis');
+const mongoose = require('mongoose');
+const User = require('./models/User');
 const app = express();
 const PORT = 5050;
 
@@ -18,6 +20,12 @@ redisClient.connect().catch(error => {
     console.error('Failed to connect to Redis:', error);
 });
 
+mongoose.connect(process.env.MONGODB_URI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useCreateIndex: true
+}).then(() => console.log('MongoDB connected successfully.'))
+    .catch(err => console.error('MongoDB connection error:', err));
 
 app.use(
     express.json(),
@@ -104,8 +112,8 @@ app.get('/disclaimer', function(req, res) {
 const loginFilePath = path.join(__dirname, 'data', 'login.txt');
 
 
-app.post('/new', (req, res) => {
-    const { username, password} = req.body;
+app.post('/new', async (req, res) => {
+    const { username, password } = req.body;
     let usernameError = null, passwordError = null;
 
     // Validate the form data
@@ -123,45 +131,50 @@ app.post('/new', (req, res) => {
     if (usernameError || passwordError) {
         res.render('create', {activePage: 'Create', usernameError, passwordError, created: false, loggedUser: req.session.username});
     } else {
-        // Process the form (e.g., save to database) and redirect or render success message
-        //check if username already exists
-        const loginData = fs.readFileSync(loginFilePath, 'utf8');
-        const users = loginData.split('\n');
-        const userExists = users.some(user => {
-            const [fileUsername] = user.split(':');
-            return fileUsername === username;
-        });
-
-        if (userExists) {
-            console.log(`Username "${username}" already exists.`)
-            res.render('create', {activePage: 'Create', usernameError: 'Username already exists.', passwordError: null, created: false, loggedUser: req.session.username});
-        }
-        else{
-            console.log(`New user created: ${username}:${password}`)
-            fs.appendFileSync(loginFilePath, `${username}:${password}\n`);
-            res.render('create', {activePage: 'Create', usernameError: null, passwordError: null, created: true, loggedUser: req.session.username});
+        // Check if username already exists in the database
+        try {
+            const existingUser = await User.findOne({ username });
+            if (existingUser) {
+                console.log(`Username "${username}" already exists.`);
+                res.render('create', {activePage: 'Create', usernameError: 'Username already exists.', passwordError: null, created: false, loggedUser: req.session.username});
+            } else {
+                // Create and save the new user
+                const newUser = new User({ username, password });
+                await newUser.save();
+                console.log(`New user created: ${username}`);
+                res.render('create', {activePage: 'Create', usernameError: null, passwordError: null, created: true, loggedUser: req.session.username});
+            }
+        } catch (error) {
+            console.error('Error registering new user:', error);
+            res.status(500).send('Error registering new user.');
         }
     }
 });
 
-app.post('/login', (req, res) => {
+app.post('/login', async (req, res) => {
     const { username, password } = req.body;
-    const loginData = fs.readFileSync(loginFilePath, 'utf8');
-    const users = loginData.split('\n');
-    const isValidUser = users.some(user => {
-        const [fileUsername, filePassword] = user.split(':');
-        return fileUsername === username && filePassword === password;
-    });
 
-    if (isValidUser) {
-        req.session.username = username;
-        req.session.save();
-        console.log(`New Session from "${req.session.username}"`); // Log the session
-        res.render('give', {activePage: 'Give', loggedUser: req.session.username, loginError: null, giveSuccess: null});
-    }
-    else {
-        console.log(`Invalid username or password for: ${username}:${password}`)
-        res.render('login', {activePage: 'Give', loginError: 'Invalid username or password.', loggedUser: req.session.username});
+    try {
+        const user = await User.findOne({ username });
+        if (user) {
+            // Directly compare the plaintext passwords
+            if (password === user.password) {
+                req.session.username = username;
+                req.session.save(() => {
+                    console.log(`New Session from "${req.session.username}"`); // Log the session
+                    res.render('give', {activePage: 'Give', loggedUser: req.session.username, loginError: null, giveSuccess: null});
+                });
+            } else {
+                console.log(`Invalid password for username: ${username}`);
+                res.render('login', {activePage: 'Give', loginError: 'Invalid username or password.', loggedUser: null});
+            }
+        } else {
+            console.log(`Username not found: ${username}`);
+            res.render('login', {activePage: 'Give', loginError: 'Invalid username or password.', loggedUser: null});
+        }
+    } catch (error) {
+        console.error('Error during login:', error);
+        res.status(500).send('Internal Server Error');
     }
 });
 app.get('/logout', (req, res) => {
