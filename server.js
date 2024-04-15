@@ -2,12 +2,19 @@ const express = require('express');
 const fs = require('fs');
 const path = require('path');
 const session = require('express-session');
-const alert = require('alert');
+const RedisStore = require('connect-redis')(session);
+const redis = require('redis');
 const app = express();
 const PORT = 5050;
 
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
+
+const redisClient = redis.createClient({
+    url: process.env.REDIS_URL,
+    legacyMode: true
+});
+redisClient.connect().catch(console.error);
 
 app.use(
     express.json(),
@@ -16,10 +23,15 @@ app.use(
     })
 );
 app.use(session({
+    store: new RedisStore({ client: redisClient }),
     secret: 'your secret key',
     resave: false,
-    saveUninitialized: true,
-    cookie: { secure: false }
+    saveUninitialized: false,
+    cookie: {
+        secure: 'auto',
+        httpOnly: true,
+        maxAge: 1000 * 60 * 60 * 24 * 7 // 1 week
+    }
 }));
 
 app.use(express.static(path.join(__dirname, 'public')));
