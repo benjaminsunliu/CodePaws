@@ -29,7 +29,7 @@ app.use(session({
     store: new RedisStore({ client: redisClient }),
     secret: 'your secret key',
     resave: false,
-    saveUninitialized: true,
+    saveUninitialized: false,
     cookie: {
         secure: 'auto',
         httpOnly: true,
