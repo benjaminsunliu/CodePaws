@@ -8,19 +8,3 @@
 8|admin|Dog|Yorkshire Terrier|Young (1-3 years)|Not Specified|undefined|undefined|undefined||Ryom|ryom@codepaws.com|/petImages/ryom.jpg
 9|admin|Cat|Persian|Adult (3-7 years)|Male|Dogs|Cats|undefined|Sleepy and Quiet|Jeff|jeff@codepaws.com|/images/codepawsnobg.png
 10|admin|Dog|Shiba Inu|Senior (7-10 years)|Not Specified|Dogs|Cats|Children|Fun and Happy! :)|Yippee|yippee@codepaws.com|/images/codepawsnobg.png
-11|xXgroomingXx|Dog|Yorkshire Terrier|Puppy/Kitten (0-1 year)|Not Specified|undefined|undefined|Children|Hes master is a groomer|Bouma|ryoma.murr2255@gmail.com|/images/codepawsnobg.png
-12|Nega|Dog|Labrador Retriever|Puppy/Kitten (0-1 year)|Male|undefined|undefined|undefined|Is blak|/Vega|bruh@bruh.com|/images/codepawsnobg.png
-13|Nega|Cat|Siamese|Puppy/Kitten (0-1 year)|Male|undefined|undefined|undefined|Yippee|Mark|yippe@yippee.com|/petImages/IMG_0417.gif
-14|ryomagroomedme|Cat|Persian|Young (1-3 years)|Male|Dogs|Cats|Children|shrodinger cat|shrodinger|ericduan2004@gmail.com|/petImages/schrodingers-cat-crop-gettyimages-676894741.webp
-15|xXgroomingXx|Dog|Other|na|Not Specified|undefined|undefined|Children|Boomers master|Yan ang|ryoma.murr2255@gmail.com|/petImages/cachedIma(1).jpg
-16|Nega|Dog|Other|Young (1-3 years)|Male|undefined|undefined|Children|Pompeii survivor|Ash|ash@babi.com|/petImages/IMG_0252.gif
-17|ryomagroomedme|Dog|Labrador Retriever|Puppy/Kitten (0-1 year)|Male|Dogs|undefined|undefined|ash baby dad|/vega|asd@gmail.com|/petImages/download.jpg
-18|Nega|Dog|Golden Retriever|Senior (7-10 years)|Male|Dogs|undefined|undefined|Hot|Groumer|eri@kgroom.ca|/petImages/lp_image.jpeg
-19|xXgroomingXx|Dog|Other|na|Not Specified|undefined|undefined|Children|You are my eclipse|Le bon bon|lebonbon@yahool.com|/petImages/Snapchat-1169066707.jpg
-20|kaoutar12|Dog|Shiba Inu|Puppy/Kitten (0-1 year)|Female|undefined|Cats|undefined|IM RAOUANE BOUSKAYA IN UR CLASS AND I LOVE YUHONG YAN|RAOUANE BOUSKAYA|rawraw@hotmail.com|/images/codepawsnobg.png
-21|user|Dog|Golden Retriever|Senior (7-10 years)|Male|Dogs|undefined|undefined|i am a dog🐶|kaoutar machouat|kaoutar@machouat.com|/petImages/dog-1-golden-retriever.jpeg
-22|kaoutar12|Cat|Labrador Retriever|Puppy/Kitten (0-1 year)|Not Specified|Dogs|undefined|undefined|non-binary cougar cat, call me at 123-456-7890|raouaneDupe|raw@raw.com|/petImages/images.jpg
-23|user|Dog|Husky|Senior (7-10 years)|Male|undefined|undefined|Children|i have 3 nipples, i am a senior dog and i get along with children🫦|kaoutar|chien@dela.casse|/petImages/TELEMMGLPICT000322227104_1_trans_NvBQzQNjv4BqqVzuuqpFlyLIwiB6NTmJwTLoapxFVSZENyNE1ivV4Eg.jpeg
-24|kaw|Dog|Labrador Retriever|Puppy/Kitten (0-1 year)|Male|Dogs|undefined|undefined||jhg|jbsdhas@nefj.dvgc|/images/codepawsnobg.png
-25|drizzy|Dog|German Shepherd|Senior (7-10 years)|Male|Dogs|undefined|undefined||bossman|rassclart@keke.ca|/images/codepawsnobg.png
-26|drizzy|Dog|Labrador Retriever|na|Male|Dogs|undefined|undefined||boss|koala@can.com|/images/codepawsnobg.png
